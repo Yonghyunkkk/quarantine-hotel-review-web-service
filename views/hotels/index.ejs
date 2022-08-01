@@ -1,0 +1,9 @@
+
+<% layout('layouts/boilerplate')%>
+<h1>Quarantine Hotels</h1>
+
+<ul>
+    <% for (let hotel of hotels) { %>
+        <li><a href="/hotels/<%= hotel._id %>"><%= hotel.title %></a></li> 
+    <% } %> 
+</ul>

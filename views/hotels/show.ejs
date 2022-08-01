@@ -1,0 +1,17 @@
+<% layout('layouts/boilerplate')%>
+<h1><%= hotel.title %></h1>
+<h2><%= hotel.address %></h2>
+
+<a href="/hotels/<%=hotel._id %>/newReview">Leave a Review</a>
+
+
+<% for(let review of hotel.reviews) { %>
+    <div class="card mb-3 ">
+        <div class="card-body">
+            <p class="starability-result" data-rating="<%=review.rating%>">
+                Rated: <%= review.rating %> stars
+            </p>
+            <p class="card-text">Review: <%= review.body %></p>
+        </div>
+    </div>
+    <% } %>
