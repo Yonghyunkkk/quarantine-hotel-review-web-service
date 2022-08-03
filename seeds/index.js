@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const hotels = require('./hotels');
 const Hotel = require('../models/hotel');
+const Review = require('../models/review');
 
 mongoose.connect('mongodb://localhost:27017/quarantine-hotel',{
 
@@ -15,6 +16,7 @@ db.once("open", () => {
 
 const seedDB = async () => {
     await Hotel.deleteMany({});
+    await Review.deleteMany({});
     for (let i = 0; i < hotels.length; i++) {
         const quarantineHotel = new Hotel({
             title: `${hotels[i].title}`,

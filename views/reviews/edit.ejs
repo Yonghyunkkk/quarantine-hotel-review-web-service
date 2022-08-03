@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate')%>
+<body>
+
+        <div class="col-6 offset-3">
+            <form action="/hotels/<%=hotel._id%>/editReview/<%= review._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Edit Body</label>
+                    <input class="form-control" type="text" id="title" name="review[body]" required>
+                </div>
+                <div class="mb-3"> 
+                    <label class="form-label" for="location">Edit Rating</label>
+                    <input class="form-control" type="text" id="location" name="review[rating]" required>
+                </div>
+            
+                <div class="mb-3">
+                    <button class="btn btn-info">Update Review</button>
+                </div>
+            </form>
+            <a href="/hotels">All Hotels</a>
+        </div>
+
+
+</body>

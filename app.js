@@ -11,6 +11,16 @@ const mongoose = require('mongoose');
 
 const ejsMate = require('ejs-mate');
 
+const catchAsync = require('./utils/catchAsync');
+const ExpressError = require('./utils/ExpressError');
+const reviewSchema = require('./schemas.js');
+
+const hotels = require('./routes/hotels');
+const reviews = require('./routes/reviews');
+
+const session = require('express-session');
+const flash = require('connect-flash');
+
 mongoose.connect('mongodb://localhost:27017/quarantine-hotel',{
 
 });
@@ -26,38 +36,51 @@ app.engine('ejs', ejsMate);
 app.set('view engine','ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+
+const sessionConfig = {
+    secret: 'thisshouldbeasecret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+
+app.use(session(sessionConfig));
+app.use(flash()); 
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+});
+
+app.use('/hotels', hotels);
+app.use('/hotels/:id', reviews);
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 //hotel router
 app.get('/', (req,res) => {
     res.render('home');
 });
 
-app.get('/hotels/:id/newReview', async(req,res) => {
-    const hotel = await Hotel.findById(req.params.id);
-    res.render('reviews/new', { hotel });
+
+app.all('*', (req,res,next) => {
+    next(new ExpressError('Page Not Found', 404));
 });
 
-app.post('/hotels/:id', async(req,res) => {
-    console.log(req.body);
-    const review = new Review(req.body.review);
-    const hotel = await Hotel.findById(req.params.id);
-    hotel.reviews.push(review);
-    await review.save();
-    await hotel.save();
-    res.redirect(`/hotels/${hotel._id}`);
-});
+app.use((err, req, res, next) => {
+    const { statusCode = 500 } = err;
+    if (!err.message) err.message = 'Oh No, Something Went Wrong!'
+    res.status(statusCode).render('error', { err })
+})
 
-app.get('/hotels', async(req, res) => {
-    const hotels = await Hotel.find({});
-    res.render('hotels/index', { hotels }); // { hotels } allows db of hotels to be passed to index.ejs
-});
-
-app.get('/hotels/:id', async(req,res) => {
-    const hotel = await Hotel.findById(req.params.id);
-    res.render('hotels/show', { hotel }); // send the hotel with that id
-});
-
-app.listen(3000, () => {
+app.listen(3001, () => {
     console.log('Serving on port 3000');
 });

@@ -13,5 +13,11 @@
             </p>
             <p class="card-text">Review: <%= review.body %></p>
         </div>
+        <div class="card-body">
+            <a class="card-link btn btn-info" href="/hotels/<%=hotel._id%>/editReview/<%=review._id%> ">Edit</a>
+            <form class="d-inline" action="/hotels/<%=hotel._id%>/deleteReview/<%=review._id%>?_method=DELETE" method="POST">
+                <button class="btn btn-danger">Delete</button>
+            </form>
+        </div>
     </div>
     <% } %>
