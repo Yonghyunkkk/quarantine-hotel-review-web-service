@@ -8,6 +8,8 @@ const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
 const { reviewSchema } = require('../schemas.js');
 
+const { isLoggedIn } = require('../middleware'); 
+
 
 const validateReview = (req, res, next) => {
     const { error } = reviewSchema.validate(req.body);
@@ -19,12 +21,12 @@ const validateReview = (req, res, next) => {
     }
 }
 
-router.get('/newReview', catchAsync(async(req,res) => {
+router.get('/newReview', isLoggedIn, catchAsync(async(req,res) => {
     const hotel = await Hotel.findById(req.params.id);
     res.render('reviews/new', { hotel });
 }));
 
-router.get('/editReview/:reviewId', catchAsync(async(req,res) => {
+router.get('/editReview/:reviewId', isLoggedIn, catchAsync(async(req,res) => {
     const hotel = await Hotel.findById(req.params.id);
     const review = await Review.findById(req.params.reviewId);
     if(!review){
@@ -34,7 +36,7 @@ router.get('/editReview/:reviewId', catchAsync(async(req,res) => {
     res.render('reviews/edit', { hotel, review });
 }));
 
-router.post('/', validateReview, catchAsync(async(req,res) => {
+router.post('/', isLoggedIn, validateReview, catchAsync(async(req,res) => {
     const review = new Review(req.body.review);
     const hotel = await Hotel.findById(req.params.id);
     hotel.reviews.push(review);
@@ -45,7 +47,7 @@ router.post('/', validateReview, catchAsync(async(req,res) => {
 }));
 
 
-router.put('/editReview/:reviewId', validateReview, catchAsync(async(req,res) => {
+router.put('/editReview/:reviewId', isLoggedIn, validateReview, catchAsync(async(req,res) => {
     const { id, reviewId } = req.params;
     const hotel = await Hotel.findById(id);
     const review = await Review.findByIdAndUpdate(reviewId, {...req.body.review});
@@ -53,7 +55,7 @@ router.put('/editReview/:reviewId', validateReview, catchAsync(async(req,res) =>
     res.redirect(`/hotels/${hotel._id}`);
 }));
 
-router.delete('/deleteReview/:reviewId', catchAsync(async(req, res) => {
+router.delete('/deleteReview/:reviewId', isLoggedIn, catchAsync(async(req, res) => {
     const { id, reviewId } = req.params;
     const hotel = await Hotel.findById(id);
     await Review.findByIdAndDelete(reviewId);

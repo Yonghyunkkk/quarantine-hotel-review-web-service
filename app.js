@@ -15,11 +15,16 @@ const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
 const reviewSchema = require('./schemas.js');
 
-const hotels = require('./routes/hotels');
-const reviews = require('./routes/reviews');
+const hotelRoutes = require('./routes/hotels');
+const reviewRoutes = require('./routes/reviews');
+const userRoutes = require('./routes/users');
 
 const session = require('express-session');
 const flash = require('connect-flash');
+
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
 
 mongoose.connect('mongodb://localhost:27017/quarantine-hotel',{
 
@@ -54,14 +59,24 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash()); 
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req, res, next) => {
+    console.log(req.session);
+    res.locals.currentUser = req.user;  //ejs files all have access to currentUser success, and error
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
 });
 
-app.use('/hotels', hotels);
-app.use('/hotels/:id', reviews);
+app.use('/hotels', hotelRoutes);
+app.use('/hotels/:id', reviewRoutes);
+app.use('/', userRoutes);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -81,6 +96,6 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err })
 })
 
-app.listen(3001, () => {
+app.listen(3000, () => {
     console.log('Serving on port 3000');
 });

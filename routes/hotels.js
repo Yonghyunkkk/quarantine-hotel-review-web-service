@@ -5,6 +5,8 @@ const Hotel = require('../models/hotel');
 
 const catchAsync = require('../utils/catchAsync');
 
+const { isLoggedIn } = require('../middleware'); 
+
 
 router.get('/', catchAsync(async(req, res) => {
     const hotels = await Hotel.find({});
