@@ -8,18 +8,8 @@ const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
 const { reviewSchema } = require('../schemas.js');
 
-const { isLoggedIn } = require('../middleware'); 
+const { isLoggedIn, isReviewAuthor, validateReview } = require('../middleware'); 
 
-
-const validateReview = (req, res, next) => {
-    const { error } = reviewSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    } else {
-        next();
-    }
-}
 
 router.get('/newReview', isLoggedIn, catchAsync(async(req,res) => {
     const hotel = await Hotel.findById(req.params.id);
@@ -39,6 +29,7 @@ router.get('/editReview/:reviewId', isLoggedIn, catchAsync(async(req,res) => {
 router.post('/', isLoggedIn, validateReview, catchAsync(async(req,res) => {
     const review = new Review(req.body.review);
     const hotel = await Hotel.findById(req.params.id);
+    review.author = req.user._id;
     hotel.reviews.push(review);
     await review.save();
     await hotel.save();
@@ -47,7 +38,7 @@ router.post('/', isLoggedIn, validateReview, catchAsync(async(req,res) => {
 }));
 
 
-router.put('/editReview/:reviewId', isLoggedIn, validateReview, catchAsync(async(req,res) => {
+router.put('/editReview/:reviewId', isLoggedIn, validateReview, isReviewAuthor, catchAsync(async(req,res) => {
     const { id, reviewId } = req.params;
     const hotel = await Hotel.findById(id);
     const review = await Review.findByIdAndUpdate(reviewId, {...req.body.review});
@@ -55,7 +46,7 @@ router.put('/editReview/:reviewId', isLoggedIn, validateReview, catchAsync(async
     res.redirect(`/hotels/${hotel._id}`);
 }));
 
-router.delete('/deleteReview/:reviewId', isLoggedIn, catchAsync(async(req, res) => {
+router.delete('/deleteReview/:reviewId', isLoggedIn, isReviewAuthor, catchAsync(async(req, res) => {
     const { id, reviewId } = req.params;
     const hotel = await Hotel.findById(id);
     await Review.findByIdAndDelete(reviewId);

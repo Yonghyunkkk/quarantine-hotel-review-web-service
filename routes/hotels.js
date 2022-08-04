@@ -5,7 +5,6 @@ const Hotel = require('../models/hotel');
 
 const catchAsync = require('../utils/catchAsync');
 
-const { isLoggedIn } = require('../middleware'); 
 
 
 router.get('/', catchAsync(async(req, res) => {
@@ -14,7 +13,11 @@ router.get('/', catchAsync(async(req, res) => {
 }));
 
 router.get('/:id', catchAsync(async(req,res) => {
-    const hotel = await Hotel.findById(req.params.id).populate('reviews'); //need to use populate so that we can get more than the id
+    const hotel = await Hotel.findById(req.params.id).populate({
+        path: 'reviews',
+        populate: {
+            path: 'author'
+        }}); //need to use populate so that we can get more than the id
     if(!hotel){
         req.flash('error', 'Cannot find that hotel!');
         return res.redirect('/hotels');

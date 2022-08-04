@@ -2,8 +2,9 @@
 <h1><%= hotel.title %></h1>
 <h2><%= hotel.address %></h2>
 
+<% if(currentUser) {%> 
 <a href="/hotels/<%=hotel._id %>/newReview">Leave a Review</a>
-
+<% } %> 
 
 <% for(let review of hotel.reviews) { %>
     <div class="card mb-3 ">
@@ -12,12 +13,15 @@
                 Rated: <%= review.rating %> stars
             </p>
             <p class="card-text">Review: <%= review.body %></p>
+            <p class="card-text">Author: <%= review.author.username %></p>
         </div>
+        <% if (currentUser && review.author.equals(currentUser._id)) {%> 
         <div class="card-body">
             <a class="card-link btn btn-info" href="/hotels/<%=hotel._id%>/editReview/<%=review._id%> ">Edit</a>
             <form class="d-inline" action="/hotels/<%=hotel._id%>/deleteReview/<%=review._id%>?_method=DELETE" method="POST">
                 <button class="btn btn-danger">Delete</button>
             </form>
         </div>
+        <% } %> 
     </div>
     <% } %>
