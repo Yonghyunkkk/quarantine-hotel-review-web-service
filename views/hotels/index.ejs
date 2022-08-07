@@ -1,8 +1,22 @@
 <% layout('layouts/boilerplate')%>
+
+<div id="map" style="width: 100%; height: 500px"></div>
+
 <h1>Quarantine Hotels</h1>
 
 <ul>
     <% for (let hotel of hotels) { %>
+        <img src=<%= hotel.image %>  class="img-fluid" alt="">
         <li><a href="/hotels/<%= hotel._id %>"><%= hotel.title %></a></li> 
     <% } %> 
 </ul>
+
+
+<script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    const hotels = {features: <%- JSON.stringify(hotels) %>}
+</script>
+
+
+
+<script src="/javascripts/clusterMap.js"></script>

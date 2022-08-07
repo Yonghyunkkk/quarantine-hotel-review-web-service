@@ -2,6 +2,10 @@ const Hotel = require('../models/hotel');
 const Review = require('../models/review');
 const { cloudinary } = require('../cloudinary');
 
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken});
+
 module.exports.renderNewReviewForm = async(req,res) => {
     const hotel = await Hotel.findById(req.params.id);
     res.render('reviews/new', { hotel });

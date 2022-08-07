@@ -21,7 +21,11 @@ const seedDB = async () => {
         const quarantineHotel = new Hotel({
             title: `${hotels[i].title}`,
             district: `${hotels[i].district}`, 
-            address: `${hotels[i].address}`, 
+            address: `${hotels[i].address}`,
+            geometry: {
+                type: "Point",
+                coordinates: [`${hotels[i].longitude}`,`${hotels[i].latitude}`]
+            },
             latitude: `${hotels[i].latitude}`, 
             longitude: `${hotels[i].longitude}`, 
             price: `${hotels[i].price}`,

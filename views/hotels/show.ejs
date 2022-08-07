@@ -1,6 +1,9 @@
 <% layout('layouts/boilerplate')%>
 <link rel="stylesheet" href="/stylesheets/stars.css">
 
+
+<div id='map' style='width: 100%; height: 300px;'></div>
+
 <h1><%= hotel.title %></h1>
 <h2><%= hotel.address %></h2>
 
@@ -49,3 +52,11 @@
         <% } %> 
     </div>
 <% } %>
+
+
+<script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    const hotel = <%- JSON.stringify(hotel) %>
+</script>
+
+<script src="/javascripts/showPageMap.js"></script>
