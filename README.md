@@ -23,3 +23,12 @@ HK Quarantine Hotel Review Web Service is a website where users can get informat
 </p>
 
 <br>
+
+## 🔖 Learnt
+>+ Designed the website layout using CSS, Bootstrap, and Bootstrapmade
+>+ Created an authentication and authorization system to allow CRUD operations on the user review for the quarantine hotels
+>+ Handled asynchronous errors 
+>+ Used MongoDB to store data of hotels and reviews 
+>+ Used models-routes-controllers code structure to further improve readability  
+>+ Used cookies and sessions  
+>+ Used Mapbox to plot quarantine hotels in Hong Kong  
