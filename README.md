@@ -21,6 +21,7 @@ HK Quarantine Hotel Review Web Service is a website where users can get informat
     <img src="https://img.shields.io/badge/Styled components-^5.3.5-ff69b4?logo=styled-components"/>
     <img src="https://img.shields.io/badge/Swiper-^8.1.0-6332F6?logo=Swiper"/>
     <img src="https://img.shields.io/badge/Firebase-^9.6.11-yellow?logo=Firebase"/>
+    <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=TensorFlow&logoColor=white">
 </p>
 
 <br>
