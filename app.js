@@ -6,6 +6,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
+const hotels = require('./hotels');
 const Hotel = require('./models/hotel');
 const Review = require('./models/review');
 
@@ -54,6 +55,42 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 const secret = process.env.SECRET || 'thisshouldbesecret!';
+
+
+const seedDB = async () => {
+    await Hotel.deleteMany({});
+    await Review.deleteMany({});
+    for (let i = 0; i < hotels.length; i++) {
+        const quarantineHotel = new Hotel({
+            title: `${hotels[i].title}`,
+            district: `${hotels[i].district}`, 
+            address: `${hotels[i].address}`,
+            geometry: {
+                type: "Point",
+                coordinates: [`${hotels[i].longitude}`,`${hotels[i].latitude}`]
+            },
+            latitude: `${hotels[i].latitude}`, 
+            longitude: `${hotels[i].longitude}`, 
+            price: `${hotels[i].price}`,
+            image: `${hotels[i].image}`,
+            link: `${hotels[i].link}`,
+            total: 0,
+            average: 0,
+            five: 0,
+            four: 0,
+            three: 0,
+            two: 0,
+            one: 0
+        });
+        console.log(Hotel.find());
+        await quarantineHotel.save();
+    }
+}
+
+
+seedDB().then(() => {
+});
+
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
