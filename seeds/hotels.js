@@ -598,5 +598,85 @@ module.exports = [
         price: 850,
         image: "https://partnernet.hktb.com/filemanager/company/60/image/22453_1.Regal%20Airport%20Hotel%20-%20Exterior.jpg",
         link: "http://www.regalhotel.com/re"
+    },
+    { 
+        title: "Regala Skycity Hotel", 
+        district: "Islands", 
+        address: "8 Airport Expo Boulevard, Hong Kong International Airport, Chek Lap Kok, Hong Kong", 
+        latitude: 22.31933609514533, 
+        longitude: 113.94204997882886,
+        price: 800,
+        image: "https://ak-d.tripcdn.com/images/02051120009ggq56q1F83_R_1100_824_R5_Q70_D.jpg",
+        link: "https://www.regala-hotels.com"
+    },
+    { 
+        title: "Crowne Plaza Hong Kong Kowloon East", 
+        district: "Sai Kung", 
+        address: "3 Tong Tak Street, Tseung Kwan O, Hong Kong", 
+        latitude: 22.308639343453507, 
+        longitude: 114.26009312578849,
+        price: 1350,
+        image: "https://pix10.agoda.net/hotelImages/5466695/0/b770a3921535961f092b06c8f0d30164.jpg?ca=23&ce=0&s=1024x768",
+        link: "http://www.crowneplaza.com/"
+    },
+    { 
+        title: "Courtyard by Marriott Hong Kong Sha Tin", 
+        district: "Sha Tin", 
+        address: "1 On Ping Street, Shatin, New Territories, Hong Kong", 
+        latitude: 22.390827884717957,
+        longitude:  114.20648756811842,
+        price: 990,
+        image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/9b/0d/50/exterior.jpg?w=1200&h=-1&s=1",
+        link: "http://www.marriott.com/HKGST"
+    },
+    { 
+        title: "Bay Bridge Lifestyle Retreat", 
+        district: "Tsuen Wan", 
+        address: " 123 Castle Peak Road, Ting Kau, Tsuen Wan, Hong Kong", 
+        latitude: 22.36782098772622,
+        longitude: 114.09219848161092, 
+        price: 750,
+        image: "https://pix10.agoda.net/hotelImages/487271/-1/746a6b4909c2480b8ceb0a09c5b8bc5f.jpg?ca=7&ce=1&s=1024x768",
+        link: "https://www.baybridgehongkong.com/baybridge"
+    },
+    { 
+        title: "Nina Hotel Tsuen Wan West", 
+        district: "Tsuen Wan", 
+        address: "11/F - 40/F , Tower 1, 8 Yeung Uk Rd, Tsuen Wan", 
+        latitude: 22.368561143880065,  
+        longitude: 114.11331456811806,
+        price: 1100,
+        image: "https://live.staticflickr.com/3157/2768425682_79869fe3b3_b.jpg",
+        link: "https://www.ninahotelgroup.com/en/nina-hotel-tsuen-wan-west-quarantine-hotel"
+    },
+    { 
+        title: "Panda Hotel", 
+        district: "Tsuen Wan", 
+        address: "3 Tsuen Wah Street, Tsuen Wan, Hong Kong", 
+        latitude: 22.369037592856287, 
+        longitude: 114.12076381044663, 
+        price: 1023,
+        image: "https://p.bookcdn.com/data/Photos/Big/3006/300679/300679240/Panda-Hotel-photos-Exterior.JPEG",
+        link: "https://www.pandahotel.com.hk/"
+    },
+    { 
+        title: "Royal View Hotel ", 
+        district: "Tsuen Wan", 
+        address: "No. 353, Castle Peak Road, Ting Kau, Tsuen Wan, Hong Kong", 
+        latitude: 22.368638894663153,
+        longitude: 114.07802139695387, 
+        price: 900,
+        image: "https://dams.dotdotnews.com/dams/product/image/202106/11/60c2ffcee4b0c39fcb1ca495.jpg",
+        link: "http://www.royalview.com.hk/"
+    },
+    { 
+        title: "Silka Far East Hotel Hong Kong", 
+        district: "Tsuen Wan", 
+        address: "135 - 143 Castle Peak Road, Tsuen Wan, New Terrorites", 
+        latitude: 22.371192291204387,
+        longitude: 114.11935468346098, 
+        price: 580,
+        image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/149347829.jpg?k=c4bae90e43aabc4f0256263e2ff122108ba4962808210fe4c082ef9a565c5021&o=&hp=1",
+        link: "http://www.silkahotels.com/fareast"
     }
 ];

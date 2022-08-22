@@ -1,0 +1,60 @@
+body {
+    height: 100vh;
+    background:linear-gradient(to left, rgba(0,0,0,0) 10%, rgba(0,0,0,1)), url('https://papers.co/wallpaper/papers.co-mh95-hongkong-night-symposium-of-light-dark-40-wallpaper.jpg?download=true');
+    background-size: cover;
+    background-position: center;
+    text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+    
+}
+.cover-container {
+  max-width: 60vw;
+}
+
+.navbar-container {
+    background: transparent;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 350px;
+    margin-bottom: 300px;
+    opacity: 0.9;
+
+}
+
+.home-title {
+    font-size: 200px;
+}
+
+@media (max-width: 1500px){
+    .home-title {
+        font-size: 100px;
+    }
+}
+
+@media (max-width: 1300px){
+    .home-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 70px;
+        margin-bottom: 300px;
+        opacity: 0.9;
+    
+    }
+}
+
+
+.button-design {
+    width: 300px;    
+}
+
+.btn-secondary, .btn-secondary:hover{
+    color: #333;
+    text-shadow: none;
+}

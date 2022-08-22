@@ -8,12 +8,13 @@ const map = new mapboxgl.Map({
 
 map.addControl(new mapboxgl.NavigationControl());
 
+
 new mapboxgl.Marker()
     .setLngLat(hotel.geometry.coordinates)
     .setPopup(
-        new mapboxgl.Popup({ offset: 25 })
+        new mapboxgl.Popup({ offset: 25})
             .setHTML(
-                `<h3>${hotel.title}</h3><p>${hotel.address}</p>`
+                `<h5 style="color: black;">${hotel.title}</h3><p style="color: black;">${hotel.address}</p>`
             )
     )
     .addTo(map)

@@ -1,8 +1,15 @@
 const Hotel = require('../models/hotel');
 
 module.exports.index = async(req, res) => {
-    const hotels = await Hotel.find({});
-    res.render('hotels/index', { hotels }); // { hotels } allows db of hotels to be passed to index.ejs
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        const hotels = await Hotel.find({title: regex});
+        const noMatch = 'No hotels match that query, please try again.';
+        res.render('hotels/index', { hotels, noMatch });
+    } else{
+        const hotels = await Hotel.find({});
+        res.render('hotels/index', { hotels }); // { hotels } allows db of hotels to be passed to index.ejs
+    }
 }
 
 module.exports.showHotel = async(req,res) => {
@@ -17,3 +24,7 @@ module.exports.showHotel = async(req,res) => {
     }
     res.render('hotels/show', { hotel }); // send the hotel with that id
 }
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};

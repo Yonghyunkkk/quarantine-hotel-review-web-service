@@ -30,7 +30,11 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 
-mongoose.connect('mongodb://localhost:27017/quarantine-hotel',{
+const dbUrl = process.env.DB_URL ||'mongodb://localhost:27017/quarantine-hotel';
+
+const MongoStore = require('connect-mongo');
+
+mongoose.connect(dbUrl,{
 
 });
 
@@ -49,8 +53,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+const secret = process.env.SECRET || 'thisshouldbesecret!';
+
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret
+    }
+});
+
+store.on("error", function(e) {
+    console.log("Session store error",e);
+});
+
 const sessionConfig = {
-    secret: 'thisshouldbeasecret',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -71,7 +89,6 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-    console.log(req.session);
     res.locals.currentUser = req.user;  //ejs files all have access to currentUser success, and error
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');

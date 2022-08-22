@@ -29,7 +29,15 @@ const seedDB = async () => {
             latitude: `${hotels[i].latitude}`, 
             longitude: `${hotels[i].longitude}`, 
             price: `${hotels[i].price}`,
-            image: `${hotels[i].image}`
+            image: `${hotels[i].image}`,
+            link: `${hotels[i].link}`,
+            total: 0,
+            average: 0,
+            five: 0,
+            four: 0,
+            three: 0,
+            two: 0,
+            one: 0
         });
         await quarantineHotel.save();
     }

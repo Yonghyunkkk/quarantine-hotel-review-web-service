@@ -24,9 +24,29 @@ module.exports.renderEditReviewForm = async(req,res) => {
 module.exports.createReview = async(req,res) => {
     const review = new Review(req.body.review);
     const hotel = await Hotel.findById(req.params.id);
+    let today = new Date();
+
     review.images = req.files.map( f => ({ url: f.path, filename: f.filename }));
     review.author = req.user._id;
+    review.date = today.toLocaleDateString();
+
     hotel.reviews.push(review);
+    hotel.total += review.rating;
+    hotel.average = Math.round((hotel.total / hotel.reviews.length) * 10) / 10;
+
+    if (review.rating === 1){
+        hotel.one += 1;
+    } else if (review.rating === 2){
+        hotel.two += 1;
+    } else if (review.rating === 3){
+        hotel.three += 1;
+    } else if (review.rating === 4){
+        hotel.four += 1;
+    } else if (review.rating === 5){
+        hotel.five += 1;
+    }
+
+    console.log(hotel);
     await review.save();
     await hotel.save();
     req.flash('success', 'Successfully uploaded a review!');

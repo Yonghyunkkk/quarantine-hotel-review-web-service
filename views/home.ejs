@@ -1,12 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quarantine Hotel Review Website</title>
-</head>
-<body>
-    <h1>Quarantine Hotel Review</h1>
+<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/home.css">
+    
+
+
+<body class="d-flex text-center  bg-dark" data-aos="fade" data-aos-delay="1000">
+    <header  id="header" class="header d-flex align-items-center fixed-top navbar-container">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+      
+          <a href="/" class="logo d-flex align-items-center  me-auto me-lg-0">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <i class="bi bi-h-circle"></i>
+            <h1>otels</h1>
+          </a>
+      
+          <nav id="navbar" class="navbar">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/hotels" >Quarantine Hotels</a></li>
+              <% if(!currentUser) { %>
+                <li><a class="nav-link" href="/login">Login</a></li>
+                <li><a class="nav-link" href="/register">Register</a></li>
+                <% } else { %>
+                <li><a class="nav-link" href="/logout">Logout</a></li>
+                <% } %>
+            </ul>
+          </nav><!-- .navbar -->
+      
+          <div class="header-social-links">
+            <a href="https://twitter.com/?lang=en" class="twitter" target="_blank"><i class="bi bi-twitter"></i></a>
+            <a href="https://www.facebook.com/" class="facebook" target="_blank"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/" class="instagram" target="_blank"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.linkedin.com/" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></i></a>
+          </div>
+          <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+          <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      
+        </div>
+      </header>
+      
+      <div class="home-container">
+        
+        
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <h1 class="home-title" style="color: white"><i class="bi bi-h-circle" style="color:#2cbc85"></i> otels</h1>
+            
+            <a href="/hotels" class="btn btn-success button-design">View Quarantine Hotels</a>
+        
+      </div>  
+   
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

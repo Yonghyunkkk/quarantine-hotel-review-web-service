@@ -1,3 +1,4 @@
+
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
     container: 'map',
@@ -5,6 +6,14 @@ const map = new mapboxgl.Map({
     center: [114.177216, 22.302711],
     zoom: 10
 });
+
+
+map.addControl(
+    new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl
+    })
+    );
 
 map.addControl(new mapboxgl.NavigationControl());
 
@@ -37,11 +46,11 @@ map.on('load', function () {
             'circle-color': [
                 'step',
                 ['get', 'point_count'],
-                '#00BCD4',
+                '#69f0ae',
                 10,
-                '#2196F3',
+                '#3cb371',
                 30,
-                '#3F51B5'
+                '#2E8B57'
             ],
             'circle-radius': [
                 'step',
