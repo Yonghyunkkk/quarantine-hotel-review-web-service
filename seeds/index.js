@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const hotels = require('./hotels');
 const Hotel = require('../models/hotel');
 const Review = require('../models/review');
-
-mongoose.connect('mongodb://localhost:27017/quarantine-hotel',{
+const dbUrl = process.env.DB_URL ||'mongodb://localhost:27017/quarantine-hotel';
+mongoose.connect(dbUrl,{
 
 });
 
@@ -39,6 +39,7 @@ const seedDB = async () => {
             two: 0,
             one: 0
         });
+        console.log(Hotel.find());
         await quarantineHotel.save();
     }
 }
