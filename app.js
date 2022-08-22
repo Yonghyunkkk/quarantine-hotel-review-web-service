@@ -82,7 +82,6 @@ const seedDB = async () => {
             two: 0,
             one: 0
         });
-        console.log(Hotel.find());
         await quarantineHotel.save();
     }
 }
