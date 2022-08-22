@@ -58,6 +58,8 @@ const secret = process.env.SECRET || 'thisshouldbesecret!';
 
 
 const seedDB = async () => {
+    await Hotel.deleteMany({});
+    await Review.deleteMany({});
     for (let i = 0; i < hotels.length; i++) {
         const quarantineHotel = new Hotel({
             title: `${hotels[i].title}`,
